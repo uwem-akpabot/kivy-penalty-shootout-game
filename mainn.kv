@@ -26,20 +26,9 @@ FloatLayout:
             size: self.size
             pos: self.pos
             source: "media/field.jpg"
-            Button:
-                size: (70, 70)
-                pos: (self.width / 2), (50)
-                text: "Open Menu"
-                on_release: 
-                    app.animate_ball(the_sliding_menu)
-        Rectangle:
-            size: (70, 70)
-            pos: (self.width / 2), (50)
-            source: "media/ball.png"
-            # pos=(376, 20), size=(40, 40)
     Button:
         size_hint: .3, .3
-        # pos_hint: {"center_x": .5, "center_y": .5}
+        pos_hint: {"center_x": .5, "center_y": .5}
         text: "Open Menu"
         on_release: 
             app.animate_ball(the_sliding_menu)

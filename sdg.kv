@@ -1,0 +1,62 @@
+#:kivy 1.0.9
+
+<SdgBall>:
+    size: 40, 40
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "media/ball.png"
+
+# <SdgKeeper>:
+#     size: 40, 40
+#     canvas:
+#         Rectangle:
+#             pos: self.center_x + 280, root.top + 400
+#             source: "media/_goalkeeper.png"
+
+# <SdgField>:
+#     canvas:
+#         Rectangle:
+
+<SdgGame>:
+    ball: sdg_ball
+    keeper: sdg_keeper
+
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "media/_greenfield.jpg"
+            # pos: self.center_x - 5, 0
+            # size: 10, self.height
+        
+        Rectangle:
+            pos: self.center_x - 155, root.top - 160
+            size: 310, 150
+            source: "media/goalpost.png"
+
+        Rectangle:
+            pos: self.center_x - 50, root.top - 160
+            size: 100, 120
+            source: "media/_goalkeeper.png"
+            id: sdg_keeper
+
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: "0"
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: "0"
+    SdgBall:
+        id: sdg_ball
+        center: self.parent.center
+    SdgKeeper:
+        id: sdg_keeper
+        # center: self.parent.center
+    # SdgField:
+    #     center: self.parent.center

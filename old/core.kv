@@ -1,0 +1,59 @@
+#:kivy 1.0.9
+
+<CoreBall>:
+    size: 50, 50
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "media/ball.png"
+            # Ellipse:
+            #     pos: self.pos
+            #     size: self.size
+
+<CoreKeeper>:
+    canvas:
+        Rectangle:
+            pos: self.center_x, self.top + 340
+            size: 120, 120
+            source: "media/goalkeeper.png"
+
+# <CoreField>:
+#     canvas:
+#         Rectangle:
+
+<CoreGame>:
+    ball: core_ball
+    keeper: core_keeper
+
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "media/field.jpg"
+            # pos: self.center_x - 5, 0
+            # size: 10, self.height
+        
+        Rectangle:
+            pos: self.center_x - 140, root.top - 160
+            size: 280, 130
+            source: "media/goalpost.png"
+
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: "0"
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: "0"
+    CoreBall:
+        id: core_ball
+        center: self.parent.center
+    CoreKeeper:
+        id: core_keeper
+        # center: self.parent.center
+    CoreField:
+        center: self.parent.center

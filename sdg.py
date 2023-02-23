@@ -7,8 +7,18 @@ from kivy.vector import Vector
 from kivy.clock import Clock
 from random import randint
 from kivy.core.audio import SoundLoader
-from kivy.config import Config
 
+class SdgGoalpost(Widget):
+    score = NumericProperty(0)
+
+    def bounce_ball(self, ball):
+        if self.collide_widget(ball):
+            vx, vy = ball.velocity
+            offset = (ball.center_y - self.center_y) / (self.height / 2)
+            bounced = Vector(-1, * vx, vy)
+            vel = bounced * 1.1
+            ball.velocity = vel.x, vel.y + offset
+    
 class SdgBall(Widget):
     velocity_x = NumericProperty(0)
     velocity_y = NumericProperty(0)
@@ -30,7 +40,7 @@ class SdgField(Widget):
 
 class SdgGame(Widget):
     # play sound
-    background_music = SoundLoader.load('media/background_music.mp3')
+    background_music = SoundLoader.load('media/_music.mp3')
     background_music.play() 
 
     ball = ObjectProperty(None)
@@ -42,7 +52,8 @@ class SdgGame(Widget):
 
     def serve_keeper(self):
         self.keeper.center = self.center
-        self.keeper.velocity = Vector(5, 0).rotate(180) # Vector(speed, angle)
+        # self.keeper.velocity = Vector(4, 0).rotate(randint(0, 360))
+        self.keeper.velocity = Vector(5, 0) # Vector(speed, angle)
 
     def update(self, dt):
         self.ball.move()
@@ -55,22 +66,22 @@ class SdgGame(Widget):
         # bounce ball off left and right
         if (self.ball.x < 0) or (self.ball.right > self.width):
             self.ball.velocity_x *= -1
-
-        """
-        # bounce keeper off top and bottom
-        if (self.keeper.y < 0) or (self.keeper.top > self.height):
-            # self.keeper.velocity_y *= -1
-            pass
-        """
+    
         # bounce keeper off left and right
-        if (self.keeper.x < 0) or (self.keeper.right > 300):
+        if (self.keeper.x < 100) or (self.keeper.right > self.width - 100):
             self.keeper.velocity_x *= -1
+
+    def on_touch_move(self, touch):
+        if touch.x < self.width / 3:
+            self.player.center_y = touch.y
+        # if touch.x > self.width - self.width / 3:
+        #     self.player2.center_y = touch.y
 
 class SdgApp(App):
     def build(self):
         self.title = 'SDG Game'
         game = SdgGame()
-        game.serve_ball()
+        # game.serve_ball()
         game.serve_keeper()
         Clock.schedule_interval(game.update, 1.0 / 60.0)
         return game

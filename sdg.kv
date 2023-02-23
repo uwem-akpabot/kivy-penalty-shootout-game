@@ -6,18 +6,26 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "media/ball2.png"
+            source: "media/_ball.png"
 
-# <SdgKeeper>:
-#     size: 40, 40
-#     canvas:
-#         Rectangle:
-#             pos: self.center_x + 280, root.top + 400
-#             source: "media/_goalkeeper.png"
+<SdgKeeper>:
+    # size: 40, 40
+    canvas:
+        # Rectangle:
+        #     pos: self.center_x + 280, root.top + 400
+        #     source: "media/_goalkeeper.png"
+        Rectangle:
+            pos: self.center_x - 50, self.top
+            size: 100, 120
+            source: "media/_goalkeeper.png"
+            # id: sdg_keeper
 
-# <SdgField>:
-#     canvas:
-#         Rectangle:
+<SdgGoalpost>:
+    size: 320, 44
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <SdgGame>:
     ball: sdg_ball
@@ -27,20 +35,24 @@
         Rectangle:
             size: self.size
             pos: self.pos
-            source: "media/fieldwallpaper.jpg"
+            source: "media/_field.jpg"
             # pos: self.center_x - 5, 0
             # size: 10, self.height
-        
-        # Rectangle:
-        #     pos: self.center_x - 155, root.top - 160
-        #     size: 310, 150
-        #     source: "media/goalpost.png"
 
+        # Goalpost line
         Rectangle:
-            pos: self.center_x - 50, root.top - 160
-            size: 100, 120
-            source: "media/_goalkeeper.png"
-            id: sdg_keeper
+            pos: 0, self.center_y + 248
+            size: self.width, 10
+
+        # Penalty line
+        Rectangle:
+            pos: 0, self.center_y - 40
+            size: self.width, 10
+
+        # Penalty spot
+        Ellipse:
+            pos: self.center_x - 25, self.center_y - 247
+            size: 50, 50
 
     Label:
         font_size: 70
@@ -54,9 +66,15 @@
         text: "0"
     SdgBall:
         id: sdg_ball
-        center: self.parent.center
+        # center: self.parent.center
+        center_x: root.width * 1 / 2
+        center_y: root.height * 1 / 7
     SdgKeeper:
         id: sdg_keeper
-        # center: self.parent.center
-    # SdgField:
-    #     center: self.parent.center
+        center: self.parent.center
+        top: root.top - 140
+
+    SdgGoalpost:
+        id: sdg_goalpost
+        y: root.height - self.height
+        center_x: root.center_x

@@ -1,0 +1,52 @@
+<SlidingPopup@GridLayout>:
+    rows: 2
+    canvas:
+        Color:
+            rgba: 1, 1, 1, .8
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    Label:
+        text: "Are you sure?"
+        font_size: 24
+    GridLayout:
+        rows: 1
+        spacing: 10,
+        padding: 10,
+        Button:
+            text: "No"
+            color: 1,0,0,1
+        Button:
+            text: "Yes"
+            color: 0,0,0,1
+
+FloatLayout:
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "media/field.jpg"
+            Button:
+                size: (70, 70)
+                pos: (self.width / 2), (50)
+                text: "Open Menu"
+                on_release: 
+                    app.animate_ball(the_sliding_menu)
+        Rectangle:
+            size: (70, 70)
+            pos: (self.width / 2), (50)
+            source: "media/ball.png"
+            # pos=(376, 20), size=(40, 40)
+    Button:
+        size_hint: .3, .3
+        # pos_hint: {"center_x": .5, "center_y": .5}
+        text: "Open Menu"
+        on_release: 
+            app.animate_ball(the_sliding_menu)
+
+    SlidingPopup:
+        id: the_sliding_menu
+        size_hint: 1, .3
+        top_hint:0
+        pos_hint: {"top": self.top_hint, "right": 1}
+

@@ -7,6 +7,7 @@ from kivy.vector import Vector
 from kivy.clock import Clock
 from random import randint
 from kivy.core.audio import SoundLoader
+from kivy.config import Config
 
 class SdgBall(Widget):
     velocity_x = NumericProperty(0)
@@ -67,6 +68,7 @@ class SdgGame(Widget):
 
 class SdgApp(App):
     def build(self):
+        self.title = 'SDG Game'
         game = SdgGame()
         game.serve_ball()
         game.serve_keeper()
@@ -75,3 +77,7 @@ class SdgApp(App):
     
 if __name__ == '__main__':
     SdgApp().run()
+
+
+# python sdg.py --size=360x740 --dpi=529
+# python sdg.py --size=740x360 --dpi=529

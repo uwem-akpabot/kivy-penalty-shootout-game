@@ -48,7 +48,7 @@ class SdgGame(Widget):
 
     def serve_ball(self):
         self.ball.center = self.center
-        self.ball.velocity = Vector(4, 0).rotate(randint(0, 360))
+        self.ball.velocity = Vector(8, 5)
 
     def serve_keeper(self):
         self.keeper.center = self.center
@@ -71,11 +71,12 @@ class SdgGame(Widget):
         if (self.keeper.x < 100) or (self.keeper.right > self.width - 100):
             self.keeper.velocity_x *= -1
 
-    def on_touch_move(self, touch):
-        if touch.x < self.width / 3:
-            self.player.center_y = touch.y
-        # if touch.x > self.width - self.width / 3:
-        #     self.player2.center_y = touch.y
+    def on_touch_down(self, touch):
+        if touch.x == self.width / 2:
+            # self.ball.center_y = touch.y
+            self.serve_ball()
+    #     # if touch.x > self.width - self.width / 3:
+    #     #     self.player2.center_y = touch.y
 
 class SdgApp(App):
     def build(self):

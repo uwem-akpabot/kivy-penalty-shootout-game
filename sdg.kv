@@ -69,12 +69,13 @@
         # center: self.parent.center
         center_x: root.width * 1 / 2
         center_y: root.height * 1 / 7
-    SdgKeeper:
-        id: sdg_keeper
-        center: self.parent.center
-        top: root.top - 140
 
     SdgGoalpost:
         id: sdg_goalpost
         y: root.height - self.height
         center_x: root.center_x
+    
+    SdgKeeper:
+        id: sdg_keeper
+        center: self.parent.center
+        top: root.top - 140
